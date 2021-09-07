@@ -4,7 +4,7 @@ require('mongoose');
 module.exports = function(app) {
     
     app.get('/api/workouts', function(req,res) {
-        db.workout.find()
+        db.Workout.find()
         .then(function(data) {
             res.json(data);
         })
@@ -14,7 +14,7 @@ module.exports = function(app) {
     });
 
     app.post('/api/workouts', function (req,res) {
-        db.workout.create({})
+        db.Workout.create({})
         .then(function(data) {
             res.json(data);
         })
@@ -24,7 +24,7 @@ module.exports = function(app) {
     });
 
     app.put('/api/workouts/:id', function (req,res) {
-        db.workout.findByIdAndUpdate(req.params.id, {$push: {exercises: req.body}})
+        db.Workout.findByIdAndUpdate(req.params.id, {$push: {exercises: req.body}})
         .then(function(data) {
             res.json(data);
         })
@@ -34,7 +34,7 @@ module.exports = function(app) {
     });
 
     app.get('/api/workouts/range', function (req,res) {
-        db.workout.find()
+        db.Workout.find()
         .then(function(data) {
             res.json(data)
         })
