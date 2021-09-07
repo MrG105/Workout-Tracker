@@ -1,10 +1,12 @@
-const db = require('../models')
+const workout = require('../models/workout')
 require('mongoose');
+const db = require('../models');
+
 
 module.exports = function(app) {
     
     app.get('/api/workouts', function(req,res) {
-        db.Workout.find()
+        db.workout.find()
         .then(function(data) {
             res.json(data);
         })
@@ -14,7 +16,7 @@ module.exports = function(app) {
     });
 
     app.post('/api/workouts', function (req,res) {
-        db.Workout.create({})
+        db.workout.create({})
         .then(function(data) {
             res.json(data);
         })
@@ -23,8 +25,8 @@ module.exports = function(app) {
           });
     });
 
-    app.put('/api/workouts/:id', function (req,res) {
-        db.Workout.findByIdAndUpdate(req.params.id, {$push: {exercises: req.body}})
+    app.put('/api/workouts/:id', function ({body, params},res) {
+        db.workout.findByIdAndUpdate(params.id, {$push: {exercises: body}})
         .then(function(data) {
             res.json(data);
         })
@@ -34,7 +36,7 @@ module.exports = function(app) {
     });
 
     app.get('/api/workouts/range', function (req,res) {
-        db.Workout.find()
+        db.workout.find()
         .then(function(data) {
             res.json(data)
         })
